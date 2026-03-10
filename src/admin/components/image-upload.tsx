@@ -30,7 +30,7 @@ const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
           // Ensure browser sets multipart boundary correctly.
           "content-type": null,
         }
-      )
+      ) as Promise<any>
     },
     onSuccess: (data) => {
       const url =

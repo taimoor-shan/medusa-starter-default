@@ -119,7 +119,7 @@ const PagesRoute = () => {
           q: searchValue || undefined,
         },
       }),
-    keepPreviousData: true,
+    placeholderData: (prev: PagesResponse | undefined) => prev,
   })
 
   const { data: editData, isLoading: isLoadingEdit } = useQuery({
