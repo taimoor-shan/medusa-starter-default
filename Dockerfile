@@ -4,6 +4,9 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /server
 
+# Increase Node.js heap size to prevent OOM during admin dashboard build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 # Copy package files and yarn config
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn/releases .yarn/releases
