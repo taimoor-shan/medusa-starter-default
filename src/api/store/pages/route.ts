@@ -41,7 +41,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   return res.json({
     pages,
-    count: metadata.count,
+    count: metadata?.count ?? 0,
     limit,
     offset,
   })
