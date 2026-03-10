@@ -1,11 +1,14 @@
 #!/bin/sh
 
-# Run migrations and start server
+set -e
+
+# Build the application
+echo "Building Medusa..."
+yarn build
+
+# Run database migrations
 echo "Running database migrations..."
 yarn medusa db:migrate
 
-echo "Seeding database..."
-yarn seed || echo "Seeding failed, continuing..."
-
-echo "Starting Medusa development server..."
-yarn dev
+echo "Starting Medusa server..."
+yarn start

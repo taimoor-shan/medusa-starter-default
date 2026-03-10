@@ -5,10 +5,9 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    databaseDriverOptions: {
-      ssl: false,
-      sslmode: 'disable',
-    },
+    databaseDriverOptions: process.env.NODE_ENV === 'production'
+      ? { ssl: { rejectUnauthorized: false } }
+      : { ssl: false },
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
@@ -45,7 +44,7 @@ module.exports = defineConfig({
           host: '0.0.0.0',
           // Allow all hosts when running in Docker (development mode)
           // In production, this should be more restrictive
-          allowedHosts: ['localhost', '.localhost', '127.0.0.1'],
+          allowedHosts: 'all',
           hmr: {
             // HMR websocket port inside container
             port: 5173,
