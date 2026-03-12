@@ -24,3 +24,7 @@ build
 !.yarn/versions
 
 .medusa
+Dockerfile
+docker-compose.yml
+.dockerignore
+start.sh
