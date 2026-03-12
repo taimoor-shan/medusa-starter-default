@@ -25,7 +25,7 @@ import {
   updateStoresStep,
   updateStoresWorkflow,
 } from "@medusajs/medusa/core-flows";
-import { ApiKey } from "../../.medusa/types/query-entry-points";
+
 
 const updateStoreCurrencies = createWorkflow(
   "update-store-currencies",
@@ -333,7 +333,7 @@ export default async function seedDemoData({ container }: ExecArgs) {
   logger.info("Finished seeding stock location data.");
 
   logger.info("Seeding publishable API key data...");
-  let publishableApiKey: ApiKey | null = null;
+  let publishableApiKey: any = null;
   const { data } = await query.graph({
     entity: "api_key",
     fields: ["id"],
@@ -359,7 +359,7 @@ export default async function seedDemoData({ container }: ExecArgs) {
       },
     });
 
-    publishableApiKey = publishableApiKeyResult as ApiKey;
+    publishableApiKey = publishableApiKeyResult;
   }
 
   await linkSalesChannelsToApiKeyWorkflow(container).run({
